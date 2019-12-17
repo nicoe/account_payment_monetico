@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:py="http://genshi.edgewall.org/">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Monetico Checkout</title>
+    </head>
+    <body>
+        <py:for each="record in records[:1]">
+        <div style="display: block; text-align: center">
+            <h1>Monetico Checkout for ${record.party.rec_name}</h1>
+            <form method="POST" id="form" action="${record.monetico_account.form_action}">
+                <py:for each="key, value in record.monetico_checkout_form.items()">
+                <input type="hidden" name="${key}" value="${value}"/>
+                </py:for>
+                <button id="customButton"
+                        style="cursor:pointer;
+                        padding: 0.5em 1em; font-size:2em;
+                        border: 1px solid #2E6DA4; border-radius: 4px;
+                        color: #FFF; background-color: #337AB7;">
+                    Pay ${record.currency.symbol}${record.amount}
+                </button>
+            </form>
+        </div>
+        </py:for>
+    </body>
+</html>
